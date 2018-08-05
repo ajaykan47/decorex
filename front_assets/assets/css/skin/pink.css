@@ -1,0 +1,96 @@
+
+/*---------- primary color ------------*/
+
+.pri-color,
+a:hover, h1 > a:hover, h2 > a:hover, h3 > a:hover, h4 > a:hover, h5 > a:hover, h6 > a:hover,
+.top-bar a:hover,
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.current-menu-item>a, 
+.header-3 .navbar-default .navbar-nav>.current-menu-item>a, 
+.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav li>a:hover,
+.search-wrap button[type="submit"]:hover, 
+.pdct-srch form .search-cat li a:hover, 
+nav.filter ul li.active a, 
+ul.products .product:hover h4 a,
+.look-product ul.products .product h4 a:hover,
+.blog-wrap .btn,
+.breadcrumb li a:hover,
+.wish_list .btn.btn-default,  
+.checkout-info a, .checkout-error a, .checkout-message a, 
+blockquote, .social.share li a:hover, 
+.btn-link:hover, a.btn-link:hover,
+.login-wrap a,
+.evo-mini-cart a.delete-item:hover,
+.menu-wrap ul li a:hover, 
+.cart-count strong,
+.filter-btn:hover,
+.btn-link, a.btn-link,
+.elec-pdct .slick-prev:hover:before, .elec-pdct .slick-next:hover:before,
+.brand-slider .slick-prev:hover:before, .brand-slider .slick-next:hover:before,
+.thumb-2 .slick-prev:hover:before, .thumb-2 .slick-next:hover:before,
+.account-nav ul li.active a{
+	color: #F75780;
+}
+
+/*---------- primary bg ----------*/
+
+.pri-bg, .banner h2.off:before, .banner h2.off:after, .banner h2.off .sub-text.top:before, .navbar-default .navbar-toggle .icon-bar, .navbar-toggle .icon-bar, .banner h2.off .sub-text.bottom:after, .btn.btn-default:hover, .title h2:after, .title h5:after, .subscription input[type="submit"], .social li a:hover,
+.look-product .wrap .buttons a:hover, .widget_title h4:after, .ui-slider-horizontal .ui-slider-handle, .ui-slider-horizontal .ui-slider-range,
+.product .btn.bdr:hover, .place-order input[type="submit"], .comment-form input[type="submit"]:hover,  
+.team-wrap .social li a:hover, .widget_shopping_cart a.btn:hover, button.close, .header-cart.cart-canvas a.crt-btn,
+.pdct-srch form button[type="submit"], .bdr-title h2 span:after, .bdr-title h3 span:after, .back-to-top:hover, .qv-close:hover, #newsletter input[type="submit"], .account-nav ul li a:before, .cat-1 h2 span:before, .cat-1 h2 span:after, .cat-2.heilight h2 span, a[class*='lightcase-icon-'].lightcase-icon-close, .slick-prev, .slick-next, .pdt_remove a{ 
+	background-color: #F75780;
+}
+
+
+/*-------- primary hover ------*/
+
+a.btn.pri-bg:hover, .subscription input[type="submit"]:hover, .place-order input[type="submit"]:hover, input[type="submit"]:hover,
+.widget_shopping_cart a.btn.pri-bg:hover,  button.close:hover, .btn.btn-default.pri-bdr:hover, .pdct-srch form button[type="submit"]:hover, #newsletter input[type="submit"]:hover{
+	background-color: #df426b;
+}
+
+
+/*--------- primary border -----*/
+
+.pri-bdr, .prmo-bnr .frame, .btn.btn-default, .cat-4:hover, .product .btn.bdr:hover, .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover, .nav-tabs>li>a:hover,  .header-cart.style2 a.crt-btn:hover, .account-nav ul li a:hover span.icon, .account-nav ul li.active a span.icon, a[class*='lightcase-icon-'].lightcase-icon-close:hover{	
+	border-color: #F75780;
+}
+
+
+
+/*---------- secondary bg --------*/
+
+.sec-bg, .product.sale .tag, .sidebar-offer .tag, .header-cart.cart-canvas a.crt-btn:hover, span.anmi-circ, .navbar-default .navbar-toggle:hover .icon-bar, .entry-info .entry-date,
+.product.new .tag{ 
+	background-color: #F299B1; 
+}
+ 
+
+ /*-------- secondary border ------*/
+
+.entry-info .entry-date:before{
+	border-bottom: 7px solid #F299B1;
+}
+
+
+/*--------- secondary color -------*/
+
+.sec-color{ 
+	color: #F299B1;
+}
+ 
+
+.sec-border{ 
+	border-color: #F299B1;
+} 
+ 
+.star-rate{
+    color: #ff7575;
+}
+ 
+.product.new .tag{
+	background-color: #15abea; 
+}

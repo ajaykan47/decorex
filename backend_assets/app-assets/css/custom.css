@@ -1,0 +1,19 @@
+.count_total{
+	background-color: #99c360;
+    padding-bottom: 12px;
+    padding-top: 13px;
+    padding-left: 32%;
+    box-shadow: 0 17px 6px 0 rgb(160, 124, 183);
+    -webkit-border-after-color: #463838;
+     border: 91px;
+    border-radius: 52%;
+	
+}
+.font-large-dashboard{
+	font-size: 18px;
+background-color: #90418c;
+padding: 0px 0px 5% 20%;
+box-shadow: 0 17px 6px 0 rgb(183, 126, 124);
+-webkit-border-after-color: #463838;
+}
+

@@ -1,0 +1,5 @@
+RewriteEngine on
+Rewritecond %{REQUEST_FILENAME}  !-f
+Rewritecond %{REQUEST_FILENAME}  !-d
+Rewritecond $1 !^(index\.php|front_assets)
+RewriteRule ^(.*)$ index.php/$1 [L]
