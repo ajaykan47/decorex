@@ -119,12 +119,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 foreach ($cartData as $items) {
                                     $no++;
                         			$img= $CI->Home_model->getImage($items['id']);
+                                    $ProName = $CI->Home_model->getProductName($items['id']);
                         			?>
                                 <tbody>
                                     
                                     <tr>
-                                        <td><?php echo $items['name']; ?>
-                                        <input type="hidden" value="<?php echo $items['name']; ?>" name="productinfo">
+                                        <td><?php echo $ProName[0]->p_name; ?>
+                                        <input type="hidden" value="<?php echo $ProName[0]->p_name; ?>" name="productinfo">
                                         </td>
                                        <td><?php echo number_format($items['qty']); ?> X <?php echo number_format($items['price']); ?></td>
                                        <td>Rs.<?php if(!empty($items['subtotal'])) {echo number_format($items['subtotal']); } ?></td>
@@ -139,12 +140,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   <?php
                                    $subtotal= $this->cart->total();
                                    $grand_total = 0;
-                                  $total=($grand_total+$subtotal+25);
+                                  $total=($grand_total+$subtotal+50);
                                    $gst=($total*18)/100;
                                   ?>
                                     <tr>
                                         <td>Total Rs.</td>
-                                        <td><input style="width: 80%;
+                                        <td><input style="width: 100%;
     background-color: #e3e3e3;
     border: none;" type="text" readonly value="<?php echo ($total+$gst); ?>" name="totalAmt"></td>
                                     </tr>
@@ -169,10 +170,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <label> Cheque Payments </label>
                                 </li>
 
-                                <li>
+                                <!--<li>
                                     <input type="radio" name="pay_mod" value="cod">
                                     <label> Cash on Delivery </label>
-                                </li>
+                                </li>-->
 
                                 <li>
                                     <input type="radio" name="pay_mod" value="paypal">

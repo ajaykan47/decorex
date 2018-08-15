@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Certificate List </h4>
+                                <h4 class="card-title">List </h4>
                                 <?php if ($this->session->flashdata('done')) { ?>
                                     <div align="center" class="disMes alert alert-success">
                                         <?php echo $this->session->flashdata('done') ?>

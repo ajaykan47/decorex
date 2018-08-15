@@ -9,13 +9,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="bm-30">
                                 <span class="icon lh"><i class="icofont icofont-ui-unlock"></i></span>
                                 <h3>Forgot Password?</h3>
-                                <?php if ($this->session->flashdata('error')) { ?>
-                                <p class="disMes alert-warning">Please Check Your User ID</p>
+                                <?php if ($this->session->flashdata('done')) { ?>
+                                    <div align="center" class="disMes alert alert-success">
+                                        <?php echo $this->session->flashdata('done') ?>
+                                    </div>
                                 <?php } ?>
-                                <p>You can reset your password here.</p>
+                                <?php if ($this->session->flashdata('error')) { ?>
+                                    <div align="center" class="disMes alert alert-danger">
+                                        <?php echo $this->session->flashdata('error') ?>
+                                    </div>
+                                <?php } ?>
                             </div>
 
-                            <form name="myform" onsubmit="return FormValidation()" onchange="return FormValidation()" action="<?php echo base_url();?>Reset/sendMail" method="post">
+                            <form name="myform" onsubmit="return FormValidation()" onchange="return FormValidation()" action="<?php echo base_url();?>Reset/ForgotPassword" method="post">
                                 
                     <div class="form-group">
                         <div class="input-group">

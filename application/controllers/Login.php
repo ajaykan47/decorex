@@ -39,14 +39,13 @@ class Login extends CI_Controller
 
     public function userLogin()
     {
-     //   print_r($_POST); die;
+    
         $username = $this->input->post('email');
         $password = md5($this->input->post('inputPass'));
         $sess_data = array();
-        $Wheredata = array('reguser_email' => $username, 'reguser_pass' => $password,);
+        $Wheredata = array('reguser_email' => $username, 'reguser_pass' => $password,'verify'=>'yes');
         $this->load->model('admin/Login_Model');
         $usedetails['result'] = $this->Login_Model->getAllData($Wheredata);
-
         if (!empty($usedetails['result'])) {
             $uid = $usedetails['result'][0]->reguser_id;
             $name = $usedetails['result'][0]->reguser_name;

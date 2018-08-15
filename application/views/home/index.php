@@ -32,7 +32,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                 </div>
                 <div class="col-md-3 ">
+                    <?php if(!empty($homecontent[0]->filename)){?>
                 <img src="<?php echo base_url('uploads/page_img/');?><?php if(!empty($homecontent[0]->filename)){echo $homecontent[0]->filename;}?>" alt="<?php echo  $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $homecontent[0]->filename); ?>" class="pull-right" style="max-width: 72%">
+                <?php }?>
                 </div>
                 </div>
             </div>
@@ -155,31 +157,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h6 class="bm-5">Select color</h6>
 
                             <div class="color-filter">
-                                <form>
-                                    <div class="radio-wrap red">
-                                        <input type="radio" name="color">
+                                <form action="<?php echo base_url('Cart/add_to_cart'); ?>">
+                                    <?php if(!empty($homeproductvalue->col1)){?>
+                                    <div class="radio-wrap white1">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col1)){echo $homeproductvalue->col1;}?>">
                                         <label>&nbsp;</label>
-                                    </div>
-                                    <!--red-->
 
-                                    <div class="radio-wrap black">
-                                        <input type="radio" name="color">
+                                    </div>
+                                    <?php } ?>
+                                    <!--red-->
+                                  
+                                    <?php if(!empty($homeproductvalue->col2)){?>
+                                    <div class="radio-wrap white2">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col2)){echo $homeproductvalue->col2;}?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--black-->
-
-                                    <div class="radio-wrap yellow">
-                                        <input type="radio" name="color">
+                                    <?php } ?>
+                                    <?php if(!empty($homeproductvalue->col3)){?>
+                                    <div class="radio-wrap white3">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col3)){echo $homeproductvalue->col3;}?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--yellow-->
-
-                                    <div class="radio-wrap blue">
-                                        <input type="radio" name="color">
+                                    <?php } ?>
+                                    <?php if(!empty($homeproductvalue->col4)){?>
+                                    <div class="radio-wrap red">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col4)){echo $homeproductvalue->col4;}?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--blue-->
-
+                                    <?php } ?>
+                                    <?php if(!empty($homeproductvalue->col5)){?>
+                                    <div class="radio-wrap blue">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col5)){echo $homeproductvalue->col5;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($homeproductvalue->col6)){?>
+                                    <div class="radio-wrap green">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col6)){echo $homeproductvalue->col6;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <?php if(!empty($homeproductvalue->col7)){?>
+                                    <div class="radio-wrap pinck">
+                                        <input type="radio" name="color" value="<?php if(!empty($homeproductvalue->col7)){echo $homeproductvalue->col7;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <!--blue-->
+                               
                             </div>
                         </div>
                         <!--color option--> 
@@ -218,7 +248,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
      <?php endforeach ;?>
 
-            <div class="container" style=" background-image: url(assets/images/fancy-feather.png); background-size: contain;background-attachment: fixed;background-position: center;background-repeat: no-repeat;"> 
+            <div class="container" style=" background-image: url(<?php echo base_url();?>front_assets/assets/images/fancy-feather.png); background-size: contain;background-attachment: fixed;background-position: center;background-repeat: no-repeat;"> 
                 <div class="row sec-mar">
                     <div class="col-md-12 col-sm-12 col-xs-12 left-block pull-right elec-new-arrival">
                         <div class="bdr-title">
@@ -263,11 +293,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             </div>
                 <!-- Modal -->
+      
 <?php foreach($newarrivalproduct as $newarrival):?>            
   <div class="modal fade" id="<?php if(!empty($newarrival->product_id)){echo $newarrival->product_id;}?>" role="dialog">
      
     <div class="modal-dialog">
-    
+    <form action="<?php echo base_url('Cart/add_to_cart'); ?>" method="post" enctype="multipart/form-data">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -306,7 +337,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <!--disc-->
 
                         <div class="flx-element bm-20">
-                            <div><strong>Availability :</strong><?php if(!empty($newarrival->availability)){echo $newarrival->availability;}?>
+                            <div><strong>Availability :</strong><?php if(!empty($newarrival->col1)){echo $newarrival->col1;}?>
                                 <span class="text-green"><i class="fa fa-check-square"></i> Stock</span>
                             </div>
                             
@@ -317,29 +348,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h6 class="bm-5">Select color</h6>
 
                             <div class="color-filter">
-                                <form>
-                                    <div class="radio-wrap red">
-                                        <input type="radio" name="color" value="red">
+                                <form action="<?php echo base_url('Cart/add_to_cart'); ?>">
+                                    <?php if(!empty($newarrival->col1)){?>
+                                    <div class="radio-wrap white1">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col1)){echo $newarrival->col1;}?>">
                                         <label>&nbsp;</label>
-                                    </div>
-                                    <!--red-->
 
-                                    <div class="radio-wrap black">
-                                        <input type="radio" name="color" value="black">
+                                    </div>
+                                    <?php } ?>
+                                 
+                                    <?php if(!empty($newarrival->col2)){?>
+                                    <div class="radio-wrap white2">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col2)){echo $newarrival->col2;}?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--black-->
-
-                                    <div class="radio-wrap yellow">
-                                        <input type="radio" name="color" value="yellow">
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col3)){?>
+                                    <div class="radio-wrap white3">
+                                        <input type="radio" name="color" value="<?php echo $newarrival->col3;?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--yellow-->
-
-                                    <div class="radio-wrap blue">
-                                        <input type="radio" name="color" value="blue">
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col4)){?>
+                                    <div class="radio-wrap red">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col4)){echo $newarrival->col4;}?>">
                                         <label>&nbsp;</label>
                                     </div>
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col5)){?>
+                                    <div class="radio-wrap blue">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col5)){echo $newarrival->col5;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col6)){?>
+                                    <div class="radio-wrap green">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col6)){echo $newarrival->col6;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col7)){?>
+                                    <div class="radio-wrap pinck">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col7)){echo $newarrival->col7;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
                                     <!--blue-->
                                 </form>
                             </div>
@@ -347,10 +405,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <!--color option--> 
 
                         <div class="btn-wrap bm-20">
-                            <input type="number" value="1" title="Qty" class="input-text qty" size="4">
-                            <a href="#" class="btn pri-bg"><i class="pe-7s-cart"></i> ADD TO CART</a>
-                            
+                            <input type="number" value="1" title="Qty" name="quantity" class="input-text qty" size="4" min="0">
+                            <input type="hidden" value="<?php if (!empty($newarrival->new_price)) { echo $newarrival->new_price; } ?>" name="product_price" class="">
+                            <input type="hidden" value="<?php if (!empty($newarrival->product_id)) { echo $newarrival->product_id; } ?>" name="product_id" class="">
+                            <input type="hidden" value="<?php if (!empty($newarrival->p_name)) { echo $newarrival->p_name; } ?>" name="product_name" class="">
+                            <input type="submit" value="ADD TO CART" class="btn btn-primary" name="btnProduct">
+                            <!-- <a href="#" class="btn pri-bg" onclick="add_cart('<?php /*echo $homeproductvalue->product_id; */?>')"><i class="pe-7s-cart"></i> ADD TO CART</a>-->
+
                         </div>
+                        </form>
                         <!--btn wrap-->
 
                         <div class="share pri-font">

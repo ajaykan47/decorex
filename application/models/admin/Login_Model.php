@@ -26,7 +26,7 @@ class Login_Model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_userLogin as lgn');
-        $this->db->join('tbl_userdetail as usd', 'usd.userd_id=lgn.reguser_id');
+        $this->db->join('tbl_userdetail as usd', 'usd.reguser_id=lgn.reguser_id');
         $this->db->where($Wheredata);
         $query = $this->db->get();
         return $query->result();

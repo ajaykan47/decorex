@@ -11,13 +11,15 @@ class Home_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    
+
     /*******Pgination***********/
-     public function record_count() {
+    public function record_count()
+    {
         return $this->db->count_all("tbl_product");
     }
 
-    public function fetch_allproduct($limit, $start) {
+    public function fetch_allproduct($limit, $start)
+    {
         $this->db->limit($limit, $start);
         $query = $this->db->get("tbl_product");
 
@@ -28,16 +30,19 @@ class Home_model extends CI_Model
             return $data;
         }
         return false;
-   }
-    /*******Pgination***********/
-    
+    }
 
-public function getExistEmail($email)
+    /*******Pgination***********/
+
+
+    public function getExistEmail($email)
     {
         $this->db->select('reguser_email');
         $this->db->from('tbl_userLogin');
-        $this->db->where('reguser_email',$email);
-       return $this->db->get()->row()->reguser_email;
+        $this->db->where('reguser_email', $email);
+        //return $this->db->get()->row()->reguser_email;
+        $query = $this->db->get();
+        return $query->result();
     }
 
     public function getsocialicon()
@@ -120,6 +125,7 @@ public function getExistEmail($email)
         $this->db->select('*');
         $this->db->from('tbl_product');
         $this->db->where('page_title', 1);
+        $this->db->limit(48);
         $this->db->where('status', 'Active');
         $query = $this->db->get();
         return $query->result();
@@ -250,13 +256,13 @@ public function getExistEmail($email)
         $query = $this->db->get();
         return $query->result();
     }
-    
-  
-    
-     function totalProduct(){
-      return $this->db->count_all_results('tbl_product');
-     }
-  
+
+
+    function totalProduct()
+    {
+        return $this->db->count_all_results('tbl_product');
+    }
+
 
     public function getproductslid($catt_id)
     {
@@ -267,7 +273,7 @@ public function getExistEmail($email)
         $query = $this->db->get();
         return $query->result();
     }
-    
+
     public function getImage($id)
     {
         $this->db->select('filename');
@@ -277,7 +283,34 @@ public function getExistEmail($email)
         return $query->result();
     }
 
-    public function getproduct($limit, $start,$cat_id)
+    /***************************************/
+    public function getProductName($id)
+    {
+        $this->db->select('pro.product_id,pro.p_name,pro.col1,pro.col2,pro.col3,pro.col3,pro.col4,pro.col5,pro.col6,pro.col7
+        ,psp.shipping_id,psp.weight,psp.amount,pgst.tax_perctg');
+        $this->db->from('tbl_product as pro');
+        $this->db->join('tbl_progst as pgst', 'pgst.product_id=pro.product_id','left');
+        $this->db->join('tbl_shipping as psp', 'psp.shipping_id=pgst.shipping_id');
+       // $this->db->join('tbl_tax as tax', 'tax.tax_id=pgst.tax_id');
+        $this->db->where('pro.product_id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getProductGst($id)
+    {
+        $this->db->select('*')
+            ->from('tbl_progst');
+        //   ->join('tbl_progst as pgst','pgst.product_id=pro.product_id');
+        $this->db->where('product_id', $id);
+        $query = $this->db->get();
+        $this->db->last_query();
+        return $query->result();
+    }
+
+    /*********************/
+
+    public function getproduct($limit, $start, $cat_id)
     {
         $this->db->select('product_id,cat_id,p_name,new_price,old_price,availability,filename,product_url,short_descr');
         $this->db->from('tbl_product');
@@ -382,74 +415,166 @@ public function getExistEmail($email)
     {
         $this->db->select('*');
         $this->db->from('tbl_userLogin as lgn');
-        $this->db->join('tbl_userdetail as uds','uds.userd_id=lgn.reguser_id');
+        $this->db->join('tbl_userdetail as uds', 'uds.reguser_id=lgn.reguser_id');
         $this->db->where('lgn.reguser_id', $idG);
         $query = $this->db->get();
         return $query->result();
 
     }
+
     /**********************Password**********************/
     public function ForgotPassword($email)
- {
+    {
         $this->db->select('reguser_email');
-        $this->db->from('tbl_userLogin'); 
-        $this->db->where('reguser_email', $email); 
-        $query=$this->db->get();
-        return $query->row_array();
- }
- public function sendpassword($data)
-{
-        $email = $data['reguser_email'];
-        $query1=$this->db->query("SELECT * from tbl_userLogin where reguser_email = '".$email."' ");
-        $row=$query1->result_array();
-        if ($query1->num_rows()>0)
-      
-{
-        $passwordplain = "";
-        $passwordplain  = rand(999999999,9999999999);
-        $newpass['reguser_pass'] = md5($passwordplain);
+        $this->db->from('tbl_userLogin');
         $this->db->where('reguser_email', $email);
-        $this->db->update('tbl_userLogin', $newpass); 
-        $mail_message='Dear '.$row[0]['reguser_email'].','. "\r\n";
-        $mail_message.='Thanks for contacting regarding to forgot password,<br> Your <b>Password</b> is <b>'.$passwordplain.'</b>'."\r\n";
-        $mail_message.='<br>Please Update your password.';
-        $mail_message.='<br>Thanks & Regards';
-        $mail_message.='<br>Decorex JSB Lighting';        
-        date_default_timezone_set('Etc/UTC');
-        require FCPATH.'assets/PHPMailer/PHPMailerAutoload.php';
-        $mail = new PHPMailer;
-        $mail->isSMTP();
-      //  $mail->SMTPSecure = "tls"; 
-        $mail->Debugoutput = 'html';
-        $mail->Host = "flawlessindia.co.in";
-        $mail->Port = 587;
-        $mail->SMTPAuth = true;   
-        $mail->Username = "decorex@flawlessindia.co.in";    
-        $mail->Password = "decorex@123";
-        $mail->setFrom('ajay@flawlessindia.in', 'admin');
-        $mail->IsHTML(true);
-        $mail->addAddress($email);
-        $mail->Subject = 'Password';
-        $mail->Body    = $mail_message;
-        $mail->AltBody = $mail_message;
-if (!$mail->send()) {
-     $this->session->set_flashdata('msg','Failed to send password, please try again!');
-} else {
-   $this->session->set_flashdata('msg','Password sent to your email!');
-}
-  redirect(base_url().'user/Login','refresh');        
-}
-else
-{  
- $this->session->set_flashdata('msg','Email not found try again!');
- redirect(base_url().'user/Login','refresh');
-}
-}
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function sendpassword($email)
+    {
+        //$email = $data['reguser_email'];
+        $query1 = $this->db->query("SELECT * from tbl_userLogin where reguser_email = '" . $email . "' ");
+        $row = $query1->result_array();
+        if ($query1->num_rows() > 0) {
+            $passwordplain = "";
+            $passwordplain = rand(999999999, 9999999999);
+            $newpass['reguser_pass'] = md5($passwordplain);
+            $this->db->where('reguser_email', $email);
+            $this->db->update('tbl_userLogin', $newpass);
+            $mail_message = 'Dear ' . $row[0]['reguser_email'] . ',' . "\r\n";
+            $mail_message .= 'Thanks for contacting regarding to forgot password,<br> Your <b>Password</b> is <b>' . $passwordplain . '</b>' . "\r\n";
+            $mail_message .= '';
+            $mail_message .= '<br>Thanks & Regards';
+            $mail_message .= '<br>Decorex JSB Lighting';
+            date_default_timezone_set('Etc/UTC');
 
 
-    
-    
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => SMTP_HOST,
+                'smtp_port' => SMTP_PORT,
+                'smtp_user' => SMTP_USER,
+                'smtp_pass' => SMTP_PASS,
+                'mailtype' => 'html',
+                'charset' => 'iso-8859-1'
+            );
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->initialize($config);
+            $this->email->from(SMTP_EMAIL, SMTP_NAME);
+
+            $this->email->to($email);
+            $this->email->subject('Decorex JSB Lighting');
+
+            $this->email->message($mail_message);
+
+            $this->email->send();
+            if (!$this->email->send()) {
+                $this->session->set_flashdata('error', 'Failed to send password, please try again!');
+            } else {
+                $this->session->set_flashdata('done', 'Password sent to your email!');
+            }
+            redirect(base_url() . 'login.html');
+        } else {
+            $this->session->set_flashdata('error', 'Email not found try again!');
+            redirect(base_url() . 'login.html');
+        }
+    }
+
+    /* 03-Aug-2018 start review */
+
+    public function get_count_review_one($por_id)
+    {
+        $this->db->select('COUNT("star_rating") as count')
+            ->from('tbl_review')
+            ->where('star_rating', 1)
+            ->where('product_id', $por_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function get_count_review_two($por_id)
+    {
+        $this->db->select('COUNT("star_rating") as count')
+            ->from('tbl_review')
+            ->where('star_rating', 2)
+            ->where('product_id', $por_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function get_count_review_three($por_id)
+    {
+        $this->db->select('COUNT("star_rating") as count')
+            ->from('tbl_review')
+            ->where('star_rating', 3)
+            ->where('product_id', $por_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function get_count_review_four($por_id)
+    {
+        $this->db->select('COUNT("star_rating") as count')
+            ->from('tbl_review')
+            ->where('star_rating', 4)
+            ->where('product_id', $por_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->count;
+        } else {
+            return 0;
+        }
+    }
+
+    public function get_count_review_five($por_id)
+    {
+        $this->db->select('COUNT("star_rating") as count')
+            ->from('tbl_review')
+            ->where('star_rating', 5)
+            ->where('product_id', $por_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->count;
+        } else {
+            return 0;
+        }
+    }
+    /* 03-Aug-2018 End review*/
+
+    /**************Verfication******/
+    public function updateRecordEmail($data, $verifymail)
+    {
+
+        $this->db->where('reguser_email', $verifymail);
+        $this->db->update('tbl_userLogin', $data);
+        $updated_status = $this->db->affected_rows();
+        if ($updated_status):
+            return true;
+        else:
+            return false;
+        endif;
+
+
+    }
 
 }
-
-?>

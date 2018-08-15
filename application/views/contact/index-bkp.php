@@ -20,8 +20,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="container">
                 <div class="row sec-mar contact-form"> 
                     <div class="col-md-6 col-sm-6 left-block">
-                        <div class="title bm-30"><h2>Make an enquiry</h2></div>						<?php 					   if(isset($_GET['response']) && $_GET['response'] == 1){							echo '<strong style="color:red;">Please Enter Name</strong>';						}						else if(isset($_GET['response']) && $_GET['response']==2){							echo '<strong style="color:red;">Please Enter Email Address</strong>';						}						else if(isset($_GET['response']) && $_GET['response']==21){							echo '<strong style="color:red;">Please Enter Valid Mail Address</strong>';						}						else if(isset($_GET['response']) && $_GET['response']==3){							echo '<strong style="color:red;">Please Enter Mobile Number</strong>';						}						 else if(isset($_GET['response']) && $_GET['response']==31){							echo '<strong style="color:red;">Please Enter Valid Mobile Number</strong>';						}																	?>
-                        <form name="myform" onsubmit="return FormValidation()" onchange="return FormValidation()" action="mails.php" Method="POST">
+                        <div class="title bm-30"><h2>Make an enquiry</h2></div>
+                        <form name="myform" onsubmit="return FormValidation()" onchange="return FormValidation()" action="" Method="POST">
                             <div class="row">
                                 <div class="form-group col-sm-6">
                                     <input type="text" name="name" id="name" placeholder="Name">

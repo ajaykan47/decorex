@@ -14,6 +14,7 @@ $user_type = $data['value']['user_type'];
 $filename = '';
 $id = '';
 $new_arrival ="";
+
 if (!empty($editResult)) {
     foreach ($editResult as $value) {
         $id = $value->product_id;
@@ -102,7 +103,7 @@ if (!empty($editResult[0]->product_id)) {
                                                            } ?>">
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="new_price">New Price
                                                     : </label>
@@ -116,6 +117,9 @@ if (!empty($editResult[0]->product_id)) {
                                                            } ?>">
                                                 </div>
                                             </div>
+                                           
+
+
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="old_price">Old Price
                                                     : </label>
@@ -141,6 +145,19 @@ if (!empty($editResult[0]->product_id)) {
                                                                echo set_value('availability');
                                                            } ?>">
                                                 </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="old_price">Select Color
+                                                    : </label>
+                                                <div class="col-md-7">
+                                                <input type="checkbox" name="col1" value="#f8f8f8"checked> Cool white
+                                                <input type="checkbox" name="col2" value="#ffebc0"<?php if(!empty($editResult[0]->col2)){?>checked<?php }?>> Warm white 
+                                                <input type="checkbox" name="col3" value="#f5e4c9"<?php if(!empty($editResult[0]->col3)){?>checked<?php }?>> Nutural white 
+                                                <input type="checkbox" name="col4" value="Red"<?php if(!empty($editResult[0]->col4)){?>checked<?php }?>> red 
+                                                <input type="checkbox" name="col5" value="Blue"<?php if(!empty($editResult[0]->col5)){?>checked<?php }?>> Green 
+                                                <input type="checkbox" name="col6" value="#3dbb11"<?php if(!empty($editResult[0]->col6)){?>checked<?php }?>> Blue 
+                                                <input type="checkbox" name="col6" value="#ff599e"<?php if(!empty($editResult[0]->col6)){?>checked<?php }?>> Pink 
+                                             </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="short_description">Product Description

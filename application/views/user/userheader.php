@@ -91,7 +91,9 @@ $CI->load->model('Home_model');
             <div class="container">
                 <div class="row header-mid">
                      <div class="col-md-3 col-sm-3">
+                         <?php if(!empty($companyinfo[0]->filename)){?>
                         <a class="navbar-brand" href="<?php echo base_url();?>"><img src="<?php echo base_url('uploads/logo/');?><?php if(!empty($companyinfo[0]->filename)){echo $companyinfo[0]->filename;}?>" alt="<?php echo  $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $companyinfo[0]->filename); ?>"></a> 
+                       <?php }?>
                         <!--<a class="navbar-brand site-brand" href="index.html">neostore</a>--> 
                     </div>
 
@@ -135,6 +137,7 @@ $CI->load->model('Home_model');
         foreach ($cartData as $items) {
             $no++;
 			$img= $CI->Home_model->getImage($items['id']);
+            $ProName = $CI->Home_model->getProductName($items['id']);
 			?>
                                     
                                     <li class="item">
@@ -144,7 +147,7 @@ $CI->load->model('Home_model');
                                         <!--product thumb-->
 
                                           <div class="item-disc">
-                                            <h6 class="pri-font"><?php echo $items['name']; ?></h6>
+                                            <h6 class="pri-font"><?php echo $ProName[0]->p_name;  ?></h6>
                                             <span class="qty"><?php if(!empty($items['qty'])){echo number_format($items['qty']);} ?></span> X <span class="item-price">Rs. <?php if(!empty($items['price'])){echo number_format($items['price']); }?></span>
                                         </div>
                                         <?php $id=$items['rowid']; ?>

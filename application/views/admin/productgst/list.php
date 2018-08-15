@@ -1,18 +1,11 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
-?> 
 <?php
-/**
- * Created by $ajaykan47.
- * User: Aanchal
- * Date: 05-04-2018
- * Time: 12:05 AM
- */
+defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!-- Navbar (Header) Ends-->
 <div class="main-panel">
     <div class="main-content">
         <div class="content-wrapper"><!-- DOM - jQuery events table -->
+
             <!-- Row created callback -->
             <!-- File export table -->
             <section id="file-export">
@@ -20,87 +13,82 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">List </h4>
+                                <h4 class="card-title">List Product Tax </h4>
+                                <?php if ($this->session->flashdata('done')) { ?>
+                                    <div align="center" class="disMes alert alert-success">
+                                        <?php echo $this->session->flashdata('done') ?>
+                                    </div>
+                                <?php } ?>
+                                <?php if ($this->session->flashdata('error')) { ?>
+                                    <div align="center" class="disMes alert alert-danger">
+                                        <?php echo $this->session->flashdata('error') ?>
+                                    </div>
+                                <?php } ?>
+                                
+                                
                             </div>
-                            <?php if ($this->session->flashdata('done')) { ?>
-                                <div align="center" class="disMes alert alert-success">
-                                    <?php echo $this->session->flashdata('done') ?>
-                                </div>
-                            <?php } ?>
-                            <?php if ($this->session->flashdata('error')) { ?>
-                                <div align="center" class="disMes alert alert-danger">
-                                    <?php echo $this->session->flashdata('error') ?>
-                                </div>
-                            <?php } ?>
 
+                             
                             <div class="card-body collapse show">
                                 <div class="card-block card-dashboard">
+                                <?php
+                                $idH = $this->input->get('idd');
+                                $idH = base64_decode($idH);
+                                ?>
+                                <a style="float:right;" href="<?php echo base_url();?>Admin/Productgst?idd=<?php echo base64_encode($idH); ?>" class="btn btn-primary">Add Tax</a>
                                     <!--<p class="card-text">Exporting data from a table can often be a key part of a complex application. The Buttons extension for DataTables provides three plug-ins that provide overlapping functionality for data export.</p>-->
                                     <table class="table table-striped table-bordered file-export">
+                                         
                                         <thead>
+                                            
                                         <tr>
                                             <th>Sn.</th>
-                                            <th>Img</th>
-                                            <th>Page Name</th>
-                                            <th>Title</th>
-                                            <th>Short Descr</th>
-                                            <th>Date</th>
-                                            <th>Updated</th>
+                                            <th>Tax Type</th>
+                                            <th>Product Name</th>
+                                            <th>Tax</th>
+                                            <th>Create Date</th>
+                                            <th>Update Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
+                                            <!--<a href="<?php echo base_url(); ?>Admin/Productgst"
+                                                       class="btn btn-danger">
+                                                        Add
+                                                    </a>-->
+
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
+
                                         $sn = 1;
                                         foreach ($result as $row) :?>
                                             <tr>
                                                 <td><?php echo $sn++; ?></td>
-                                                <td><img style="width: 60px; height: 56px;  " src="<?php echo base_url();?>uploads/page_img/<?php echo $row->filename; ?>"></td>
-
-                                                <td><?php if($row->title_name==1){
-                                                        echo 'Home';
-                                                    }else if($row->title_name==2){
-                                                        echo 'Abouts-us';
-                                                    }
-                                                    else if($row->title_name==3){
-                                                        echo 'Infertility';
-                                                    }
-                                                    else if($row->title_name==4){
-                                                        echo 'Ultrasonography';
-                                                    }
-                                                    else if($row->title_name==5){
-                                                        echo 'Media Gallery';
-                                                    }
-                                                    else if($row->title_name==6){
-                                                        echo 'Contact-us';
-                                                    }
-
-                                                    ?></td>
-
-                                                <td><?php echo $row->page_title; ?></td>
-
-                                                <td><?php echo substr($row->full_descr,0,100); ?></td>
+                                                <td><?php echo $row->tax_type; ?></td>
+                                                <td><?php echo $row->product_name; ?></td>
+                                                <td><?php echo $row->tax_perctg; ?></td>
                                                 <td><?php echo $row->created_at; ?></td>
                                                 <td><?php echo $row->updated_at; ?></td>
-                                                <td><?php if ($row->status == 'Active') {
-                                                        echo
-                                                        '<label class="label btn-success"> Active </label>';
-                                                    } else {
-                                                        echo '<label class="label btn-warning"> InActive </label>';
+                                                <td><?php if($row->status=='Active'){echo
+                                                    '<label class="label btn-success"> Active </label>';
+                                                    }else{
+                                                        echo   '<label class="label btn-warning"> InActive </label>';
                                                     } ?></td>
                                                 <td class="center">
-                                                    <a href="<?php echo base_url(); ?>Admin/Page?id=<?php echo base64_encode($row->p_id); ?>"
+                                                    <a href="<?php echo base_url(); ?>Admin/Productgst?id=<?php echo base64_encode($row->progst_id); ?>"
                                                        class="btn btn-primary">
                                                         Edit
                                                     </a>
-                                                    <!--<a class="btn btn-danger"
-                                                       href="<?php echo base_url(); ?>Admin/Page/deleteContent?id=<?php echo base64_encode($row->p_id); ?>"
-                                                       onclick="return confirm('Would you want to delete?');">Delete</a>-->
+                                                    <a class="btn btn-danger"
+                                                       href="<?php echo base_url(); ?>Admin/Productgst/deleteProductgst?id=<?php echo base64_encode($row->progst_id); ?>"
+                                                       onclick="return confirm('Would you want to delete?');">Delete</a>
+                                                    
                                                 </td>
+
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
@@ -109,8 +97,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </section>
             <!-- File export table -->
+
         </div>
     </div>
+
     <footer class="footer footer-static footer-light">
         <p class="clearfix text-muted text-sm-center px-2"><span>Copyright  &copy; 2018 <a
                         href="http://flawlessindia.in" id="pixinventLink"

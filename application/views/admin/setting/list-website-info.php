@@ -71,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <a  href="<?php echo base_url();?>Admin/Setting/changeLogo?id=<?php  echo base64_encode($row->logo_id); ?>" class="btn btn-primary">
                                                         Edit
                                                     </a>
-                                                    <a class="btn btn-danger" href="<?php echo base_url();?>Admin/Setting/deleteInformation?id=<?php echo $row->logo_id; ?>" onclick="return confirm('Would you want to delete website information...??');">Delete</a>
+                                                    <!--<a class="btn btn-danger" href="<?php echo base_url();?>Admin/Setting/deleteInformation?id=<?php echo $row->logo_id; ?>" onclick="return confirm('Would you want to delete website information...??');">Delete</a>-->
 
 
                                                 </td>

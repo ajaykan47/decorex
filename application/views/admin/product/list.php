@@ -70,8 +70,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         View
                                                     </a>-->
                                                     <a class="btn btn-danger" href="<?php echo base_url();?>Admin/Product/deleteProduct?id=<?php echo base64_encode($row->product_id); ?>" onclick="return confirm('Would you want to delete?');">Delete</a>
-
-
+                                                    <a  href="<?php echo base_url();?>Admin/Productgst/listProductgst?idd=<?php  echo base64_encode($row->product_id); ?>" class="btn btn-primary">
+                                                        Add Tax
+                                                    </a>
+                                                     
                                                 </td>
 
                                             </tr>

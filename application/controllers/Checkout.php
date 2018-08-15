@@ -7,7 +7,7 @@ class Checkout extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Home_model');
-        
+
     }
 
     public function index()
@@ -41,7 +41,8 @@ class Checkout extends CI_Controller
 
     public function check()
     {
-
+       
+           
         $customer_name = $this->input->post('f_name');
         $product_info = $this->input->post('productinfo');
         $customer_emial = $this->input->post('email');
@@ -55,20 +56,21 @@ class Checkout extends CI_Controller
         $pay_mod = $this->input->post('pay_mod');
         $createAccount = $this->input->post('createAccount');
         $passWord = date('hmydhis');
-        
-        if(!empty($createAccount)){
-            $verify='yes';
-        }else{
-            $verify='no';
+
+        if (!empty($createAccount)) {
+            $verify = 'yes';
+        } else {
+            $verify = 'no';
         }
+
 
         $money = $amount;
         $formatedNumber = number_format($money, 2, '.', '');
         if ($createAccount == 'on') {
             $data = array(
-               'reguser_email' => $customer_emial,
-                'reguser_pass' =>md5($passWord),
-                'verify'=>$verify
+                'reguser_email' => $customer_emial,
+                'reguser_pass' => md5($passWord),
+                'verify' => $verify
 
             );
             $this->db->insert('tbl_userLogin', $data);
@@ -76,7 +78,7 @@ class Checkout extends CI_Controller
         if ($pay_mod == "paypal") {
             $MERCHANT_KEY = "Pgcx0M";
             $SALT = "pB7RTuqb";
- 
+
 
             $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
 
@@ -89,10 +91,10 @@ class Checkout extends CI_Controller
             $hashstring = ($MERCHANT_KEY . '|' . $txnid . '|' . $formatedNumber . '|' . $product_info . '|' . $customer_name . '|' . $customer_emial . '||' . $udf2 . '|' . $udf3 . '|' . $udf4 . '|' . $udf5 . '||||||' . $SALT);
 
             $hash = (strtolower(hash('sha512', $hashstring)));
-           
-            $success = base_url() . 'Status';
-            $fail = base_url() . 'Status';
-            $cancel = base_url() . 'Status';
+
+            $success = base_url() . '';
+            $fail = base_url() . '';
+            $cancel = base_url() . '';
 
             $data = array(
                 'mkey' => $MERCHANT_KEY,
@@ -105,19 +107,49 @@ class Checkout extends CI_Controller
                 'phoneno' => $customer_mobile,
                 'address' => $customer_address,
                 'action' => "https://secure.payu.in/_payment",
-               
+
                 'sucess' => $success,
                 'failure' => $fail,
-                'cancel' => $cancel
+                'cancel' => $cancel,
+                'purchase_date' => date('Y-m-d H:i:s')
             );
-            
+            if (!$cancel) {
+                $this->db->insert('tbl_order', $data);
+            }
             $this->load->view('payment/confirmation', $data);
         } else {
             redirect(base_url());
-            
-           // echo 'You Choose Other Option Please Contact To developer'; die;
+
+            // echo 'You Choose Other Option Please Contact To developer'; die;
         }
     }
 
+    public function successtransation()
+    {
+        echo "<script language='javascript' type='text/javascript'>
+        alert('Your transaction has been completed successfully');
+       // window.location.href='www.decorex.in';
+        </script>";
+
+
+    }
+
+    public function canceltransation()
+    {
+        echo "<script language='javascript' type='text/javascript'>
+        alert('Your Order is Successfully Cancel Sorry for the inconvence...!!!');
+       // window.location.href='www.decorex.in';
+        </script>";
+    }
+
+    public function failtransation()
+    {
+        echo "<script language='javascript' type='text/javascript'>
+        alert('Your transaction is Fail Please Try Again...!!!');
+       // window.location.href='www.decorex.in';
+        </script>";
+
+
+    }
 
 }

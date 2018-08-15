@@ -5,11 +5,11 @@
                 <span class="icon radius-circle"><i class="pe-7s-keypad"></i></span> Dashboard
             </a>
         </li>
-        <li>
+        <!--<li>
             <a href="<?php echo base_url('orders.html'); ?>">
                 <span class="icon radius-circle"><i class="pe-7s-cart"></i></span> Orders
             </a>
-        </li>
+        </li>-->
     <!--    <li>
             <a href="<?php echo base_url('account-detail.html'); ?>">
                 <span class="icon radius-circle"><i class="pe-7s-user"></i></span> Account details

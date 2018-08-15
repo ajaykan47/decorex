@@ -14,77 +14,6 @@ box-sizing: initial;
 font-size: 24px;     margin-right: 37%;
     float: right;
 }
-
-#pagination{
-margin: 40 40 0;
-}
-
-.input_country {
-display: inline;
-margin: 53px;
-}
-ul.tsc_pagination li a
-{
-border:solid 1px;
-border-radius:3px;
--moz-border-radius:3px;
--webkit-border-radius:3px;
-padding:6px 9px 6px 9px;
-}
-ul.tsc_pagination li
-{
-padding-bottom:1px;
-}
-ul.tsc_pagination li a:hover,
-ul.tsc_pagination li a.current
-{
-color:#FFFFFF;
-box-shadow:0px 1px #EDEDED;
--moz-box-shadow:0px 1px #EDEDED;
--webkit-box-shadow:0px 1px #EDEDED;
-}
-ul.tsc_pagination
-{
-margin:4px 0;
-padding:0px;
-height:100%;
-overflow:hidden;
-font:12px 'Tahoma';
-list-style-type:none;
-}
-ul.tsc_pagination li
-{
-float:left;
-margin:0px;
-padding:0px;
-margin-left:5px;
-}
-ul.tsc_pagination li a
-{
-color:black;
-//display:block;
-text-decoration:none;
-padding:7px 10px 7px 10px;
-}
-ul.tsc_pagination li a img
-{
-border:none;
-}
-ul.tsc_pagination li a
-{
-color:#0A7EC5;
-border-color:#8DC5E6;
-background:#F8FCFF;
-}
-ul.tsc_pagination li a:hover,
-ul.tsc_pagination li a.current
-{
-text-shadow:0px 1px #388DBE;
-border-color:#3390CA;
-background:#58B0E7;
-background:-moz-linear-gradient(top, #B4F6FF 1px, #63D0FE 1px, #58B0E7);
-background:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), color-stop(0.02, #63D0FE), color-stop(1, #58B0E7));
-}
 </style>
         <div class="pg-header jarallax overlay parlx-pad sec-mar">
             <img class="jarallax-img" src="<?php echo base_url();?>front_assets/assets/images/page-title.jpg" alt="">
@@ -118,7 +47,6 @@ background:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), colo
                             <div class="sorting-wrap">
                                 Showing 1–12 of 292 results
                             </div>
-							ho gya kya? 
                             
                         </div>-->
                         <!--sorting outer-->
@@ -157,9 +85,9 @@ background:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), colo
                             <!--result count-->
 
                             <div class="pagination">
-                                <ul class="tsc_pagination">
+                                <ul class="page-numbers">
                                      <?php 
-                                     
+                                     print_r($links);
                                      foreach ($links as $link) 
                           {
                             echo "<li>". $link."</li>";
@@ -197,10 +125,7 @@ background:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), colo
             </div>  
         </main>
         <!--main-->
-
-
-
-<?php foreach($productresult as $productvalue):?>            
+<?php foreach($productresult as $productvalue):?>
   <div class="modal fade" id="<?php if(!empty($productvalue->product_id)){echo $productvalue->product_id;}?>" role="dialog">
      
     <div class="modal-dialog">
@@ -254,29 +179,55 @@ background:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), colo
                             <h6 class="bm-5">Select color</h6>
 
                             <div class="color-filter">
-                                <form>
-                                    <div class="radio-wrap red">
-                                        <input type="radio" name="color">
+                                <form action="<?php echo base_url('Cart/add_to_cart'); ?>">
+                                     <?php if(!empty($newarrival->col1)){?>
+                                    <div class="radio-wrap white1">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col1)){echo $newarrival->col1;}?>">
                                         <label>&nbsp;</label>
                                     </div>
+                                    <?php } ?>
                                     <!--red-->
-
-                                    <div class="radio-wrap black">
-                                        <input type="radio" name="color">
+                                    <?php if(!empty($newarrival->col2)){?>
+                                    <div class="radio-wrap white2">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col2)){echo $newarrival->col2;}?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--black-->
-
-                                    <div class="radio-wrap yellow">
-                                        <input type="radio" name="color">
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col3)){?>
+                                    <div class="radio-wrap white3">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col3)){echo $newarrival->col3;}?>">
                                         <label>&nbsp;</label>
                                     </div>
                                     <!--yellow-->
-
-                                    <div class="radio-wrap blue">
-                                        <input type="radio" name="color">
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col4)){?>
+                                    <div class="radio-wrap red">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col4)){echo $newarrival->col4;}?>">
                                         <label>&nbsp;</label>
                                     </div>
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col5)){?>
+                                    <div class="radio-wrap blue">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col5)){echo $newarrival->col5;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col6)){?>
+                                    <div class="radio-wrap green">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col6)){echo $newarrival->col6;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <?php if(!empty($newarrival->col7)){?>
+                                    <div class="radio-wrap pinck">
+                                        <input type="radio" name="color" value="<?php if(!empty($newarrival->col7)){echo $newarrival->col7;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
                                     <!--blue-->
                                 </form>
                             </div>
@@ -295,9 +246,9 @@ background:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0.02, #B4F6FF), colo
                         <!--btn wrap-->
 
                         <div class="share pri-font">
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i> facebook</a>
-                            <a href="#" class="twitter"><i class="fa fa-twitter"></i> twitter</a>
-                            <a href="#" class="pin"><i class="fa fa-pinterest-p"></i> pinterest</a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"  target="_blank" class="facebook"><i class="fa fa-facebook"></i> facebook</a>
+                            <a href="https://twitter.com/intent/tweet"  target="_blank;" class="twitter"><i class="fa fa-twitter"></i> twitter</a>
+                            <a href="https://pinterest.com/pin/create/button/?url=&media=&description=" target="_blank;" class="pin"><i class="fa fa-pinterest-p"></i> pinterest</a>
                         </div>
                     </div>
                 </div>

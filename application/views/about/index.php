@@ -25,7 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!--left-->
 
                     <div class="col-md-4 col-sm-4">
+                        <?php if(!empty($Aboutcontent[0]->filename)){?>
                             <figure><img src="<?php echo base_url('uploads/page_img/');?><?php if(!empty($Aboutcontent[0]->filename)){echo $Aboutcontent[0]->filename;}?>" alt="<?php echo  $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $Aboutcontent[0]->filename); ?>"></figure>
+                       <?php }?>
                     </div>
                 </div>    
             </div>

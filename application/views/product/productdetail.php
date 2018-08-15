@@ -12,6 +12,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         float: right;
     }
 </style>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <form action="<?php echo base_url('Cart/add_to_cart'); ?>" method="post" enctype="multipart/form-data">
     <main class="main single-product">
         <div class="container">
@@ -79,14 +88,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 </div>
                                             </div>
                                             <!--price wrap-->
-
                                             <div class="disc bm-25">
                                                 <p><?php if (!empty($productdetail[0]->short_descr)) {
                                                         echo $productdetail[0]->short_descr;
                                                     } ?></p>
                                             </div>
                                             <!--disc-->
-
                                             <div class="flx-element bm-30">
                                                 <div><strong>Availability
                                                         :</strong> <?php if (!empty($productdetail[0]->availability)) {
@@ -97,32 +104,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 </div>
                                             </div>
                                             <!--flex-->
-                                            <div class="color-option bm-25">
+                                            <div class="color-option bm-25">  
                                                 <h6 class="bm-5">Select color</h6>
-
                                                 <div class="color-filter">
                                                     <form action="<?php echo base_url('Cart/add_to_cart'); ?>">
-                                                        <div class="radio-wrap red">
-                                                            <input type="radio" name="color" value="red">
-                                                            <label>&nbsp;</label>
-
-                                                        </div>
-                                                        <!--red-->
-                                                        <div class="radio-wrap black">
-                                                            <input type="radio" name="color" value="black">
-                                                            <label>&nbsp;</label>
-                                                        </div>
-                                                        <!--black-->
-                                                        <div class="radio-wrap yellow">
-                                                            <input type="radio" name="color">
-                                                            <label>&nbsp;</label>
-                                                        </div>
-                                                        <!--yellow-->
-                                                        <div class="radio-wrap blue">
-                                                            <input type="radio" name="color">
-                                                            <label>&nbsp;</label>
-                                                        </div>
-                                                        <!--blue-->
+                                                     <?php if(!empty($productdetail[0]->col1)){?>
+                                    <div class="radio-wrap white1">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col1)){echo $productdetail[0]->col1;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <!--red-->
+                                    <?php if(!empty($productdetail[0]->col2)){?>
+                                    <div class="radio-wrap white2">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col2)){echo $productdetail[0]->col2;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--black-->
+                                    <?php } ?>
+                                    <?php if(!empty($productdetail[0]->col3)){?>
+                                    <div class="radio-wrap white3">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col3)){echo $productdetail[0]->col3;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--yellow-->
+                                    <?php } ?>
+                                    <?php if(!empty($productdetail[0]->col4)){?>
+                                    <div class="radio-wrap red">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col4)){echo $productdetail[0]->col4;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($productdetail[0]->col5)){?>
+                                    <div class="radio-wrap blue">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col5)){echo $productdetail[0]->col5;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($productdetail[0]->col6)){?>
+                                    <div class="radio-wrap green">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col6)){echo $productdetail[0]->col6;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <?php if(!empty($productdetail[0]->col7)){?>
+                                    <div class="radio-wrap pinck">
+                                        <input type="radio" name="color" value="<?php if(!empty($productdetail[0]->col7)){echo $productdetail[0]->col7;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <!--blue-->
 
                                                 </div>
                                             </div>
@@ -130,11 +164,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <!--btn wrap-->
                                             <div class="social-share">
                                                 <strong>Share &nbsp;</strong>
-                                                <a href="#" data-toggle="tooltip" title="Facebook"><i
+                                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" data-toggle="tooltip" title="Facebook"><i
                                                             class="fa fa-facebook"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Twitter"><i
+                                                <a href="https://twitter.com/intent/tweet"  target="_blank;" data-toggle="tooltip" title="Twitter" class="twitter-share-button"><i
                                                             class="fa fa-twitter"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Pinterest"><i
+                                                <a href="https://pinterest.com/pin/create/button/?url=&media=&description=" target="_blank;" data-toggle="tooltip" title="Pinterest"><i
                                                             class="fa fa-pinterest-p"></i></a>
                                             </div>
                                         </div>
@@ -160,7 +194,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <span>Quantity</span>
                                     <div class="detail-qty border radius inline-block">
                                         <input type="number" value="1" title="quantity" name="quantity"
-                                               class="input-text qty" size="4"/>
+                                               class="input-text qty" min="0" size="4"/>
                                         <input type="hidden" value="<?php if (!empty($productdetail[0]->p_name)) {
                                             echo $productdetail[0]->p_name;
                                         } ?>" name="product_name">
@@ -179,10 +213,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
 </form>
     <ul class="list-none">
-        <li><a href="#"><span class="color"><i class="fa fa-globe"
+        <!--<li><a href="#"><span class="color"><i class="fa fa-globe"
                                                aria-hidden="true"></i></span>Free
                 Worldwide
-                Shipping</a></li>
+                Shipping</a></li>-->
         <li><a href="#"><span class="color"><i class="fa fa-check-circle-o"
                                                aria-hidden="true"></i></span>100% Money
                 Back
@@ -251,70 +285,113 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="total-rate-feedback">
                                 <p class="color">Feedback Rating for This Product</p>
                                 <table class="table-responsive">
+								
                                     <tbody>
                                     <tr>
-                                        <td rowspan="2"><span><b>Positive</b> (100%)</span></td>
+									
+                                        <td rowspan="2"><span><b>Positive</b></span></td>
                                         <td>
+										<?php 
+								    	$resultRatingCountfive ;
+										$percentage_five= ($resultRatingCountfive*(100/100));
+										?>
                                             <div class="table">
-                                                <div class="number-star"><span>5 Stars (2)</span></div>
-                                                <div class="progress-star">
+											<?php if($resultRatingCountfive==0){?>
+											<div class="number-star"><span>5 Stars [0]</span></div>
+                                            <?php } else { ?>  
+											<div class="number-star"><span>5 Stars [<?php echo $resultRatingCountfive; ?>]</span></div>
+											<?php } ?>
+												<div class="progress-star">
                                                     <div class="average-progress">
                                                         <div class="inner-average-progress"
-                                                             style="width:100%"></div>
+                                                             style="width:<?php echo $percentage_five ; ?>%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+										
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+										<?php
+										$resultRatingCountfour; 
+										$percentage_four= ($resultRatingCountfour*(80/100));
+										?>
+                                            <div class="table">
+											<?php if($resultRatingCountfour==0){?>
+                                                <div class="number-star"><span>4 Stars [0]</span></div>
+                                            <?php } else { ?>  
+												<div class="number-star"><span>4 Stars [<?php echo $resultRatingCountfour; ?>]</span></div>
+                                            <?php } ?>    
+												<div class="progress-star">
+                                                    <div class="average-progress">
+                                                        <div class="inner-average-progress"
+                                                             style="width:<?php echo $percentage_four; ?>%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+										
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span><b>Neutral</b></span></td>
+                                        <td>
+										<?php 
+										$resultRatingCountthree; 
+										$percentage_three= ($resultRatingCountthree*(60/100));
+										?>
+                                            <div class="table">
+											<?php if($resultRatingCountthree==0){?>
+                                                <div class="number-star"><span>3 Stars [0]</span></div>
+                                            <?php } else { ?>  
+												<div class="number-star"><span>3 Stars [<?php echo $resultRatingCountthree; ?>]</span></div>
+                                            <?php } ?> 
+											<div class="progress-star">
+                                                    <div class="average-progress">
+                                                        <div class="inner-average-progress"
+                                                             style="width:<?php echo $percentage_three; ?>%"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td rowspan="2"><span><b>Negative </b></span></td>
                                         <td>
+										<?php 
+										$resultRatingCounttwo; 
+										$percentage_two= ($resultRatingCounttwo*(40/100));
+										?>
                                             <div class="table">
-                                                <div class="number-star"><span>4 Stars (2)</span></div>
-                                                <div class="progress-star">
+											<?php if($resultRatingCounttwo==0){?>
+                                                <div class="number-star"><span>2 Stars [0]</span></div>
+                                            <?php } else { ?>  
+												<div class="number-star"><span>2 Stars [<?php echo $resultRatingCounttwo; ?>]</span></div>
+                                            <?php } ?> 
+											<div class="progress-star">
                                                     <div class="average-progress">
                                                         <div class="inner-average-progress"
-                                                             style="width:0%"></div>
+                                                             style="width:<?php echo $percentage_two; ?>%"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span><b>Neutral</b> (0%)</span></td>
-                                        <td>
+                                        <td><?php 
+										$resultRatingCountone; 
+										$percentage_one= ($resultRatingCountone*(20/100));
+										?>
                                             <div class="table">
-                                                <div class="number-star"><span>3 Stars (0)</span></div>
-                                                <div class="progress-star">
+											<?php if($resultRatingCountone==0){?>
+                                                <div class="number-star"><span>1 Stars [0]</span></div>
+                                            <?php } else { ?>  
+												<div class="number-star"><span>1 Stars [<?php echo $resultRatingCountone; ?>]</span></div>
+                                            <?php } ?> 
+                                            <div class="progress-star">
                                                     <div class="average-progress">
                                                         <div class="inner-average-progress"
-                                                             style="width:0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2"><span><b>Negative </b> (0%)</span></td>
-                                        <td>
-                                            <div class="table">
-                                                <div class="number-star"><span>2 Stars (0)</span></div>
-                                                <div class="progress-star">
-                                                    <div class="average-progress">
-                                                        <div class="inner-average-progress"
-                                                             style="width:0%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="table">
-                                                <div class="number-star"><span>1 Stars (0)</span></div>
-                                                <div class="progress-star">
-                                                    <div class="average-progress">
-                                                        <div class="inner-average-progress"
-                                                             style="width:0%"></div>
+                                                             style="width:<?php echo $percentage_one; ?>%"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -323,7 +400,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                       
+					   </div>
                     </div>
 
                     <div class="table-responsive">
@@ -584,29 +662,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                             <div class="color-filter">
 
-                                                <div class="radio-wrap red">
-                                                    <input type="radio" name="color">
-                                                    <label>&nbsp;</label>
-                                                </div>
-                                                <!--red-->
+                                               <?php if(!empty($productslidvalue->col1)){?>
+                                    <div class="radio-wrap white1">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col1)){echo $productslidvalue->col1;}?>">
+                                        <label>&nbsp;</label>
 
-                                                <div class="radio-wrap black">
-                                                    <input type="radio" name="color">
-                                                    <label>&nbsp;</label>
-                                                </div>
-                                                <!--black-->
-
-                                                <div class="radio-wrap yellow">
-                                                    <input type="radio" name="color">
-                                                    <label>&nbsp;</label>
-                                                </div>
-                                                <!--yellow-->
-
-                                                <div class="radio-wrap blue">
-                                                    <input type="radio" name="color">
-                                                    <label>&nbsp;</label>
-                                                </div>
-                                                <!--blue-->
+                                    </div>
+                                    <?php } ?>
+                                    <!--red-->
+                                   
+                                    <?php if(!empty($productslidvalue->col2)){?>
+                                    <div class="radio-wrap white2">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col2)){echo $productslidvalue->col2;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--black-->
+                                    <?php } ?>
+                                    <?php if(!empty($productslidvalue->col3)){?>
+                                    <div class="radio-wrap white3">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col3)){echo $productslidvalue->col3;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--yellow-->
+                                    <?php } ?>
+                                    <?php if(!empty($productslidvalue->col4)){?>
+                                    <div class="radio-wrap red">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col4)){echo $productslidvalue->col4;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($productslidvalue->col5)){?>
+                                    <div class="radio-wrap blue">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col5)){echo $productslidvalue->col5;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <!--blue-->
+                                    <!--blue-->
+                                    <?php } ?>
+                                    <?php if(!empty($productslidvalue->col6)){?>
+                                    <div class="radio-wrap green">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col6)){echo $productslidvalue->col6;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <?php if(!empty($productslidvalue->col7)){?>
+                                    <div class="radio-wrap pinck">
+                                        <input type="radio" name="color" value="<?php if(!empty($productslidvalue->col7)){echo $productslidvalue->col7;}?>">
+                                        <label>&nbsp;</label>
+                                    </div>
+                                    <?php } ?>
+                                    <!--blue-->
 
                                             </div>
                                         </div>

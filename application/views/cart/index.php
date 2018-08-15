@@ -1,6 +1,6 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
+error_reporting(0);
 $CI =& get_instance();
 $CI->load->model('Home_model');
 ?>
@@ -34,7 +34,7 @@ $CI->load->model('Home_model');
         <form action="<?php echo base_url('Cart/update_cart');?>" method="post">
             <div class="row sec-mar">
                 <div class="col-md-12 col-sm-12">
-                    <!-- <form  method="POST" action="<?php //  echo base_url('cart/update_cart');?>" enctype="multipart">-->
+
                     <table class="table_shop">
                         <thead>
                         <tr>
@@ -42,6 +42,8 @@ $CI->load->model('Home_model');
                             <th class="pdt_name">Product</th>
                             <th class="pdt_price">Price</th>
                             <th class="pdt_qty">Quantity</th>
+                          <!--  <th class="pdt_subtotal">Sub Total</th>
+                            <th class="pdt_subtotal">GST</th>-->
                             <th class="pdt_subtotal">Total</th>
                         </tr>
                         </thead>
@@ -53,38 +55,53 @@ $CI->load->model('Home_model');
                         $grand_total = 0;
 
                         $cartData= $this->cart->contents();
-
+                        $sum=0;
 
                         foreach ($cartData as $items) {
                             $no++;
-                            $img= $CI->Home_model->getImage($items['id']);
+                            $img = $CI->Home_model->getImage($items['id']);
+                            $ProName = $CI->Home_model->getProductName($items['id']);
 
+                            if(empty($proctgst))
+                            {
+
+                                $gst= ($items['price']*$catcgst)/100;
+                            }else{
+                                $gst= ($items['price']*$proctgst)/100;
+                            }
+
+                            $sum=$sum+$items['price'];
+                           // $gst= ($items['price']*18)/100;
 
                             echo form_hidden('cart[' . $items['id'] . '][id]',    $items['id']);
                             echo form_hidden('cart[' . $items['id'] . '][rowid]', $items['rowid']);
-                            echo form_hidden('cart[' . $items['id'] . '][name]',  $items['name']);
+                            echo form_hidden('cart[' . $items['id'] . '][name]',  $ProName[0]->p_name);
+
                             echo form_hidden('cart[' . $items['id'] . '][price]', $items['price']);
+                            echo form_hidden('cart[' . $items['id'] . '][price]', $gst);
+                            echo form_hidden('cart[' . $items['id'] . '][price]', $items['price']+$gst);
                             // echo form_hidden('cart[' . $items['id'] . '][qty]', $items['qty']);
-
                             ?>
-
                             <tr class="crt_itm"><?php $id=$items['rowid']; ?>
                                 <td class="pdt_remove" data-title="Remove"> <a href="<?php echo base_url().'cart/delete_cart/'.$id;?>"><i class="pe-7s-close"></i></a> </td>
 
                                 <td class="pdt_name" data-title="Product Name">
                                     <figure class="pdt_thumb">
-                                        <img src="<?php echo base_url();?>front_assets/assets/images/cart-pdt-thumb1.jpg" alt="">
+                                        <?php if(!empty($img[0]->filename)){?>
+                                        <img src="<?php echo base_url('uploads/product/'.$img[0]->filename);?>" alt="<?php echo  $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $img[0]->filename); ?>">
+                                    <?php }?>
                                     </figure>
 
-                                    <span class="pdt_title"><?php if(!empty($items['name'])){echo $items['name'];
+                                    <span class="pdt_title"><?php if(!empty($ProName[0]->p_name)){echo $ProName[0]->p_name;
                                             // echo $items['rowid'];
                                         }?></span>
                                 </td>
 
                                 <td class="pdt_price" data-title="Price">Rs. <?php if(!empty($items['price'])){ echo number_format($items['price']); }?></td>
+
                                 <?php echo form_input(array('name' =>'rowid1[]', 'type'=>'hidden', 'value' => $items['rowid'], 'maxlength' => '3', 'size' => '10')); ?>
                                 <td class="pdt_qty" data-title="Quantity">
-                                    <?php echo form_input(array('name' =>'qty[]', 'type'=>'number','class'=>'form-control', 'style'=>'width:57%' ,'value' => $items['qty'], 'maxlength' => '3', 'size' => '5','min'=>'0')); ?>
+                                    <?php echo form_input(array('name' =>'qty[]', 'type'=>'number','class'=>'form-control', 'style'=>'width:57%' ,'value' => $items['qty'], 'maxlength' => '3', 'size' => '5','min'=>'1')); ?>
                                     <input type="submit" value="Update">
                                 </td>
                                 <td class="pdt_subtotal" data-title="Total">Rs. <?php if(!empty($items['subtotal'])) {echo number_format($items['subtotal']); } ?></td>
@@ -92,16 +109,6 @@ $CI->load->model('Home_model');
                             </tr>
                         <?php }    ?>
                         <!--single item-->
-
-
-                        <!--single item-->
-
-
-                        <!--single item-->
-
-
-                        <!--single item-->
-
                         <tr>
                             <td colspan="5" class="cupon-action">
                                 <div class="flx-element">
@@ -124,14 +131,13 @@ $CI->load->model('Home_model');
                             <td>Subtotal</td>
                             <td>Rs. <?php echo $subtotal= $this->cart->total();?></td>
                         </tr>
-
                         <tr>
                             <td>Shipping</td>
-                            <td>Rs. 25.00</td>
+                            <td>Rs. 50.00</td>
                         </tr>
                         <tr>
                             <?php
-                            $total= $subtotal+25;
+                            $total= $subtotal+50;
                             $gstAmt=($total*18)/100;
                             ?>
                             <td>GST(18%)</td>

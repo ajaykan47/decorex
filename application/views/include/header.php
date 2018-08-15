@@ -1,4 +1,10 @@
-<?php 
+<?php
+error_reporting(0);
+if ((strpos($_SERVER['HTTP_HOST'], 'www.') === false))
+{
+    header('Location: http://www.'.$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
 defined('BASEPATH') OR exit('No direct script access allowed');
 $data['Value'] = $this->session->userdata('Userlogindetails');
 $idG = $data['Value']['reguser_id'];
@@ -89,7 +95,9 @@ $idG = $data['Value']['reguser_id'];
             <div class="container">
                 <div class="row header-mid">
                     <div class="col-md-3 col-sm-3">
+                        <?php if(!empty($companyinfo[0]->filename)){?>
                         <a class="navbar-brand" href="<?php echo base_url();?>"><img src="<?php echo base_url('uploads/logo/');?><?php if(!empty($companyinfo[0]->filename)){echo $companyinfo[0]->filename;}?>" alt="<?php echo  $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $companyinfo[0]->filename); ?>"></a> 
+                        <?php }?>
                         <!--<a class="navbar-brand site-brand" href="index.html">neostore</a>--> 
                     </div>
 
@@ -114,20 +122,26 @@ $idG = $data['Value']['reguser_id'];
                         <!--header mini cart-->
 
                         <div class="header-cart style2">
-                            <a id="detail_cart" href="#" class="cart_data crt-btn drop-cart pe-7s-cart"><?php echo count($this->cart->contents());?> </a>
-                            
+                            <a id="detail_cart" href="<?php echo base_url();?>" class="cart_data crt-btn drop-cart pe-7s-cart"><?php echo count($this->cart->contents());?> </a>
+                            <?php if(!empty(count($this->cart->contents()))){ ?>
                             <div class="widget widget_shopping_cart ">
-                                <h5 class="title">Your cart have (<span><?php if(!empty($this->cart->contents())){echo count($this->cart->contents());} else { echo '0';}?></span> Items)</h5>
+                                <h5 id="detail_cart" class="title">Your cart have (<span><?php if(!empty(count($this->cart->contents()))){echo count($this->cart->contents());} else { echo '0';}?></span> Items)</h5>
                                 <ul class="neo-mini-cart">
+                                    <?php }else{?>
+                                    <div class="widget widget_shopping_cart ">
+                                <h5 id="detail_cart" class="title"></h5>
+                                <ul class="neo-mini-cart">
+                                    <?php }?>
 								<?php
-								
+
 								  $no = 0;
-								 
-								 $cartData=  $this->cart->contents();     
+
+								 $cartData=  $this->cart->contents();
 								
         foreach ($cartData as $items) {
             $no++;
 			$img= $CI->Home_model->getImage($items['id']);
+            $ProName = $CI->Home_model->getProductName($items['id']);
 			?>
                                     <li class="item">
                                         <figure class="product-thumb">
@@ -136,7 +150,7 @@ $idG = $data['Value']['reguser_id'];
                                         <!--product thumb-->
 
                                         <div class="item-disc">
-                                            <h6 class="pri-font"><?php echo $items['name']; ?></h6>
+                                            <h6 class="pri-font"><?php echo $ProName[0]->p_name; ?></h6>
                                             <span class="qty"><?php if(!empty($items['qty'])){echo number_format($items['qty']);} ?></span> X <span class="item-price">Rs. <?php if(!empty($items['price'])){echo number_format($items['price']); }?></span>
                                         </div>
                                         <?php $id=$items['rowid']; ?>
@@ -148,7 +162,7 @@ $idG = $data['Value']['reguser_id'];
 <?php if(!empty($items['subtotal'])){?>
                                 <div class="mini-cart-total flx-element">
                                     <span>Subtotal</span> 
-                                    <span>Rs. <?php if(!empty($items['subtotal'])){echo number_format($items['subtotal']); } ?></span>
+                                    <span>Rs. <?php echo $this->cart->total();  ?></span>
                                 </div>
 
                                 <div class="btn-hold flx-element">
@@ -159,8 +173,9 @@ $idG = $data['Value']['reguser_id'];
                             </div>
                             <!--mini cart-->
                         </div>
+                           
                         <!--header mini cart-->
-                       
+
                     </div>
                 </div>
             </div>
@@ -179,7 +194,7 @@ $idG = $data['Value']['reguser_id'];
 
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                               <li class="menu-item-has-children">
+                               <li>
                                    <a href="<?php echo base_url();?>">HOME</a></li>
                                <li class="active menu-item-has-children mega-menu">
                                     <a href="#">shop</a>
@@ -203,6 +218,7 @@ $idG = $data['Value']['reguser_id'];
                                         </div>
                                     </div>
                                 </li>
+                                <li><a href="<?php echo base_url('contact.html');?>">Contact Us</a></li>    
                             </ul>
                             </div> 
                         </div>

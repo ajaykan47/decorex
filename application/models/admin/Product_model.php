@@ -26,6 +26,38 @@ class Product_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    public function getproductnameById($tableName, $id)
+    {
+        $this->db->select('product_id,p_name')
+            ->from($tableName)
+            ->where("product_id", $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getcategorynameById($tableName, $id)
+    {
+        $this->db->select('cat_id,name')
+            ->from($tableName)
+            ->where("cat_id", $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getDDLtaxtype($tableName)
+    {
+        $this->db->select('tax_id,tax_type')
+            ->from($tableName)
+            ->order_by("tax_id", "asc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getDDLweight($tableName)
+    {
+        $this->db->select('shipping_id,weight')
+            ->from($tableName)
+            ->order_by("shipping_id", "asc");
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function getCategoryNamebyJoining()
     {
@@ -36,7 +68,46 @@ class Product_model extends CI_Model
         return $query->result();
 
     }
+    public function gettaxtypeJoining($id)
+    {
+        $this->db->select('pd.*,tax.tax_type,tax.tax_id');
+        $this->db->from('tbl_progst as pd');
+        $this->db->join('tbl_tax as tax', 'tax.tax_id=pd.tax_id', 'left');
+        $this->db->join('tbl_product as p', 'p.product_id=pd.product_id', 'left');
+        $this->db->where('pd.product_id',$id);
+        $query = $this->db->get();
+        return $query->result();
 
+    }
+    public function gettaxtypeforcatJoining($id)
+    {
+        $this->db->select('pd.*,tax.tax_type,tax.tax_id');
+        $this->db->from('tbl_catgst as pd');
+        $this->db->join('tbl_tax as tax', 'tax.tax_id=pd.tax_id', 'left');
+        $this->db->join('tbl_category as c', 'c.cat_id=pd.cat_id', 'left');
+        $this->db->where('c.cat_id',$id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+     public function getcategoryid($id)
+    {
+        $this->db->select('catgst_id,cat_id');
+        $this->db->from('tbl_catgst');
+        $this->db->where('catgst_id',$id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+     public function getproductid($id)
+    {
+        $this->db->select('progst_id,product_id');
+        $this->db->from('tbl_progst');
+        $this->db->where('progst_id',$id);
+        $query = $this->db->get();
+        return $query->result();
+
+    }
     public function getlistCatProductbyId($idG)
     {
         $this->db->select('pd.*');

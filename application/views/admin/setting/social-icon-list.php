@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Website Information List </h4>
+                                <h4 class="card-title">Socialmedia List </h4>
                                 <?php if ($this->session->flashdata('update')) { ?>
                                     <p style="float: right;" class="disMes alert alert-success">Web Information
                                         Successfully updated...!</p>

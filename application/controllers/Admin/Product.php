@@ -100,7 +100,41 @@ class Product extends CI_Controller
             } else {
                 $cf2 = "";
             }
-
+                  if (!empty($this->input->post('col1'))) {
+            $col1 = $this->input->post('col1');
+        } else {
+            $col1 = "";
+        }
+        if (!empty($this->input->post('col2'))) {
+            $col2 = $this->input->post('col2');
+        } else {
+            $col2 = "";
+        }
+        if (!empty($this->input->post('col3'))) {
+            $col3 = $this->input->post('col3');
+        } else {
+            $col3 = "";
+        }
+        if (!empty($this->input->post('col4'))) {
+            $col4 = $this->input->post('col4');
+        } else {
+            $col4 = "";
+        }
+        if (!empty($this->input->post('col5'))) {
+            $col5 = $this->input->post('col5');
+        } else {
+            $col5 = "";
+        }
+        if (!empty($this->input->post('col6'))) {
+            $col6 = $this->input->post('col6');
+        } else {
+            $col6 = "";
+        }
+         if (!empty($this->input->post('col7'))) {
+            $col7 = $this->input->post('col7');
+        } else {
+            $col7 = "";
+        }    
             /***********Seo Content Start Here********/
             $producct_url = createUrl($product_name);
            // $getLastId=$this->Home_model->getLastIdProduct();
@@ -166,6 +200,13 @@ class Product extends CI_Controller
                     'info_descr' => $info_descr,
                     'cf1' => $cf1,
                     'cf2' => $cf2,
+                    'col1' => $col1,
+                    'col2' => $col2,
+                    'col3' => $col3,
+                    'col4' => $col4,
+                    'col5' => $col5,
+                    'col6' => $col6,
+                    'col7' => $col7,
                     'seo_title' => $txtSeoTitle,
                     'meta_tag' => $MetaTag,
                     'meta_descr' => $TxtMetaDescr,
@@ -204,6 +245,7 @@ class Product extends CI_Controller
 
     public function updateProduct()
     {
+        
         $upload_data = "";
         $idH = $this->input->post('hidden_id');
         $filename = $this->input->post('file_name');
@@ -251,6 +293,41 @@ class Product extends CI_Controller
             $cf2 = $this->input->post('cf2');
         } else {
             $cf2 = "";
+        }
+        if (!empty($this->input->post('col1'))) {
+            $col1 = $this->input->post('col1');
+        } else {
+            $col1 = "";
+        }
+        if (!empty($this->input->post('col2'))) {
+            $col2 = $this->input->post('col2');
+        } else {
+            $col2 = "";
+        }
+        if (!empty($this->input->post('col3'))) {
+            $col3 = $this->input->post('col3');
+        } else {
+            $col3 = "";
+        }
+        if (!empty($this->input->post('col4'))) {
+            $col4 = $this->input->post('col4');
+        } else {
+            $col4 = "";
+        }
+        if (!empty($this->input->post('col5'))) {
+            $col5 = $this->input->post('col5');
+        } else {
+            $col5 = "";
+        }
+        if (!empty($this->input->post('col6'))) {
+            $col6 = $this->input->post('col6');
+        } else {
+            $col6 = "";
+        }
+        if (!empty($this->input->post('col7'))) {
+            $col7 = $this->input->post('col7');
+        } else {
+            $col7 = "";
         }
         /***********Seo Content Start Here********/
         $producct_url = createUrl($product_name);
@@ -322,6 +399,13 @@ class Product extends CI_Controller
             'info_descr' => $info_descr,
             'cf1' => $cf1,
             'cf2' => $cf2,
+            'col1' => $col1,
+            'col2' => $col2,
+            'col3' => $col3,
+            'col4' => $col4,
+            'col5' => $col5,
+            'col6' => $col6,
+            'col7' => $col7,
             'seo_title' => $txtSeoTitle,
             'meta_tag' => $MetaTag,
             'meta_descr' => $TxtMetaDescr,

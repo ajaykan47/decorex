@@ -67,11 +67,13 @@ $route['signup.html'] = 'Signup';
 $route['reset-password.html'] = 'Reset';
 $route['cart.html'] = 'Cart';
 $route['checkout.html'] = 'Checkout';
+$route['cancel.html'] = 'Checkout/canceltransation';
+$route['success.html'] = 'Checkout/successtransation';
+$route['fail.html'] = 'Checkout/failtransation';
 $route['orders.html'] = 'Orders';
 $route['account-detail.html'] = 'Accountdetail';
 $route['dashboard.html'] = 'Dashboard';
 $route['profilesetting.html'] = 'Profilesetting';
 
 $route['product-search'] = 'Product/search';
-$route['(:any)/(:any)'] = 'Product/pname/$1/$2';
 $route['(:any)'] = 'Product/pname/$1';

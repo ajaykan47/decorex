@@ -39,8 +39,8 @@ class Signup extends CI_Controller
     }
 
     public function addRegister()
-    {   
-        
+    {
+
         $varif_code = random_code();
         $this->form_validation->set_rules('name', 'Password', 'required');
         $this->form_validation->set_rules('mobile', 'Password', 'required');
@@ -52,24 +52,27 @@ class Signup extends CI_Controller
             redirect(base_url() . "signup.html");
 
         } else {
-            
-            
+
+
             $name = $this->input->post('name');
             $mobile = $this->input->post('mobile');
             $email = $this->input->post('email');
-            
+
             $exitMail = $this->Home_model->getExistEmail($email);
-            if($exitMail==$email){
-                  $emailValid = $this->input->post('email');
-            }else{
-                
-             $this->session->set_flashdata('error', 'You are Already Registered Please Login or Reset Password !!');
-            redirect(base_url() . "signup.html"); 
+            foreach ($exitMail as $exitMaill) {
+                $reguser_email = $exitMaill->reguser_email;
+            }
+            if ($reguser_email != $email) {
+                $emailValid = $this->input->post('email');
+            } else {
+
+                $this->session->set_flashdata('error', 'You are Already Registered Please Login or Reset Password !!');
+                redirect(base_url() . "signup.html");
             }
             $password = md5($this->input->post('password'));
 
             $createdate = date('Y-m-d H:i:s');
-            $reguser_add='Mayur Kanta';
+            $reguser_add = 'Mayur Kanta';
             $ipAddress = $this->input->ip_address();
             $browser = $this->agent->agent_string();
             $dataArr = array(
@@ -77,14 +80,43 @@ class Signup extends CI_Controller
                 'reguser_pass' => $password,
                 'verify' => 'no'
             );
+
+
             $tableName = "tbl_userLogin";
             $res = $this->Setting_model->insertData($tableName, $dataArr);
             if (!empty($res)) {
+
+                /****Mail**For**Otp***********/
+                $config = Array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => SMTP_HOST,
+                    'smtp_port' => SMTP_PORT,
+                    'smtp_user' => SMTP_USER,
+                    'smtp_pass' => SMTP_PASS,
+                    'mailtype' => 'html',
+                    'charset' => 'iso-8859-1'
+                );
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+                $this->email->initialize($config);
+                $this->email->from(SMTP_EMAIL, SMTP_NAME);
+                $data = array(
+                    'name' => $name,
+                    'usermail' => $emailValid,
+                    'userpassword' => $this->input->post('password'),
+                );
+                $this->email->to($email);
+                $this->email->subject('Decorex JSB Lighting');
+                $message = $this->load->view('template/registration', $data, TRUE);
+                $this->email->message($message);
+
+                $result = $this->email->send();
+
                 $data = array(
                     'reguser_name' => $name,
                     'reguser_lastname' => 'null',
                     'reguser_mobile' => $mobile,
-                    'reguser_altmail' =>'null' ,
+                    'reguser_altmail' => 'null',
                     'reguser_agent' => $browser,
                     'reguser_ip' => $ipAddress,
                     'reguser_add' => 'null',
@@ -97,51 +129,38 @@ class Signup extends CI_Controller
                 );
                 $tableName = "tbl_userdetail";
                 $result = $this->Setting_model->insertData($tableName, $data);
-                if(!empty($result) && $result >0 )
-                {
-                $data = array(
-                'to' => $email,
-                'subject' => '[Decorex] Please Confirm Your E-mail Address',
-                'message' => '
-                    <p>Hi !</p>
-                    <p>Welcome to Decorex. Having you as a part of this Business Community makes us proud!</br>
-                    You are receiving this e-mail because user at has given yours as an e-mail address to connect their account.
-                     </p>
-                     <p>To Confirm it was you:</p>
-                    <p><a href="' . base_url('Signup/varify_user?email=' . $email . 'ajay' . $varif_code) . '">Click here</a></p>
-                    <p>For any queries, mail us at ' . INFO_EMAIL . '.</p>
-                    <p>Thanks & Regards,<br>Team Decorex <br>
-                                        Mobile: +91 8882029116
-                                        </p>
-                '
-            );
-            sendmail($data);
-            
-                $this->session->set_flashdata('Regdone', 'You are successfully Register Please Go to Your E-mail Account and Click Activation Link  Thanks !');
-                redirect(base_url() . "signup.html");
-        } else {
-             $this->session->set_flashdata('Regerror', 'Your data not Inserted');
-                redirect(base_url() . "signup.html");
+                if (!empty($result) && $result > 0) {
+
+                    $this->session->set_flashdata('Regdone', 'You are successfully Register Please Go to Your E-mail Account and Click Activation Link  Thanks !');
+                    redirect(base_url() . "login.html");
+                } else {
+                    $this->session->set_flashdata('Regerror', 'Your data not Inserted');
+                    redirect(base_url() . "signup.html");
+                }
+
             }
-        
-            }}}
-    
-    
-     public function varifyUser($email, $varify_code) {
-        $this->db->select('*');
-        $this->db->from('tbl_userLogin');
-        $this->db->where(array('reguser_email' => $email, 'varify' => $varify_code));
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            $this->db->where('reguser_email', $email);
-            $this->db->update('tbl_userLogin', array('varify' => 'yes'));
-            return $query->result();
-        } else {
-            return false;
         }
     }
-    
-    
+
+
+    public function varifyUser()
+    {
+
+        $verifymail = $this->input->get('verify');
+        $data = array(
+            'verify' => 'yes'
+        );
+        if ($this->Home_model->updateRecordEmail($data, $verifymail)) {
+            $this->session->set_flashdata('done', 'Verification done...!!');
+            redirect(base_url() . "login.html");
+        } else {
+            $this->session->set_flashdata('error', 'Your Activation Code is Not Valid...!!');
+            redirect(base_url() . "login.html");
+        }
+
+    }
+
+
 }
 
 

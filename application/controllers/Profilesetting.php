@@ -47,7 +47,7 @@ class Profilesetting extends CI_Controller
             'reguser_email' => $email,
 
         );
-        $tableName = "tbl_userLogin";
+        $tableName = "tbl_userLogin"; 
         $DbKey = "reguser_id";
         $res = $this->Setting_model->updateRecord($DbKey, $idH, $tableName, $dataArr);
         if (!empty($res)) {
@@ -69,7 +69,7 @@ class Profilesetting extends CI_Controller
 
             );
             $tableName = "tbl_userdetail";
-            $DbKey = "userd_id";
+            $DbKey = "reguser_id";
             $this->Setting_model->updateRecord($DbKey, $idH, $tableName, $data);
             $this->session->set_flashdata('done', 'You are Successfully Update The Profile Record...!');
             redirect(base_url() . "profilesetting.html");

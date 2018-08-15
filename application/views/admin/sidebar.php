@@ -65,6 +65,20 @@ $mobile = $data['value']['mobile'];
                                     Social Icon
                                 </a>
                             </li>
+                            <li><a href="<?php echo base_url(); ?>Admin/Taxtype" class="menu-item">Add Tax
+                              
+                                </a>
+                            </li>
+                            <li><a href="<?php echo base_url(); ?>Admin/Taxtype/ListTaxtype" class="menu-item">
+                                    List Tax Type</a>
+                            </li>
+                            <li><a href="<?php echo base_url(); ?>Admin/Shipping" class="menu-item">Add Shipping
+                              
+                                </a>
+                            </li>
+                            <li><a href="<?php echo base_url(); ?>Admin/Shipping/ListShipping" class="menu-item">
+                                    List Shipping</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="has-sub nav-item"><a href="#"><i
@@ -88,10 +102,10 @@ $mobile = $data['value']['mobile'];
                                     class="fa-star font-medium-4 fa fa-spin white align-middle"></i><span data-i18n=""
                                                                                                           class="menu-title">Page Content</span></a>
                         <ul class="menu-content">
-                            <li><a href="<?php echo base_url(); ?>Admin/Page" class="menu-item">Add Home/About Content
+                            <!--<li><a href="<?php echo base_url(); ?>Admin/Page" class="menu-item">Add Home/About Content
                                 </a>
-                            </li>
-                            <li><a href="<?php echo base_url() ?>Admin/Page/listPage" class="menu-item">List Home/About
+                            </li>-->
+                            <li><a href="<?php echo base_url() ?>Admin/Page/listPage" class="menu-item">Update Home/About
                                     </a>
                             </li>
                             <li><a href="<?php echo base_url(); ?>Admin/Page/heading" class="menu-item">Add Other Page 
@@ -168,6 +182,7 @@ $mobile = $data['value']['mobile'];
 
                         </ul>
                     </li>
+                    
                     <li class="has-sub nav-item"><a href="#"><i
                                     class="ft-box font-medium-4 fa fa-spin white align-middle"></i><span data-i18n=""
                                                                                                          class="menu-title">Seo Keyword</span></a>
@@ -183,12 +198,11 @@ $mobile = $data['value']['mobile'];
                         </ul>
                     </li>
 
-                    <li class="has-sub nav-item"><a href="#"><i
+                    <!--<li class="has-sub nav-item"><a href="#"><i
                                     class="ft-box font-medium-4 fa fa-spin white align-middle"></i><span data-i18n=""
                                                                                                          class="menu-title">Customer</span></a>
                         <ul class="menu-content">
-                           <!-- <li class="has-sub"><a href="<?php /*echo base_url(); */?>Admin/MetaTag" class="menu-item">Add
-                                    Keyword</a>-->
+                          
 
                             <li class="has-sub"><a href="<?php echo base_url(); ?>Admin/Customer"
                                                    class="menu-item">List
@@ -196,7 +210,7 @@ $mobile = $data['value']['mobile'];
 
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
 
                 </ul>
             </div>
@@ -249,6 +263,8 @@ $mobile = $data['value']['mobile'];
                                 <div class="dropdown-divider"></div>
                                 <a href="<?php echo base_url(); ?>Admin/Dashboard/logout" class="dropdown-item"><i
                                             class="ft-power mr-2"></i><span>Logout</span></a>
+                                <a href="<?php echo base_url(); ?>Admin/Reset" class="dropdown-item"><i
+                                            class="ft-edit mr-2"></i><span>Change Password</span></a>            
                             </div>
                         </li>
 

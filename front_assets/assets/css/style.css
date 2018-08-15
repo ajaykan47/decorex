@@ -970,20 +970,32 @@ form.search-form input[type="search"]{
 
 
 /*------- colors -----*/
+.check-wrap.white1 input[type="checkbox"]+label:before,
+.radio-wrap.white1 input[type="radio"]+label:before {
+    background-color: #f8f8f8;
+}
+.check-wrap.white2 input[type="checkbox"]+label:before,
+.radio-wrap.white2 input[type="radio"]+label:before {
+    background-color: #ffebc0;
+}
+.check-wrap.white3 input[type="checkbox"]+label:before,
+.radio-wrap.white3 input[type="radio"]+label:before {
+    background-color: #f5e4c9;
+}
 
 .check-wrap.red input[type="checkbox"]+label:before,
 .radio-wrap.red input[type="radio"]+label:before {
     background-color: #ff4040;
 }
 
-.check-wrap.black input[type="checkbox"]+label:before,
-.radio-wrap.black input[type="radio"]+label:before {
-    background-color: #000;
+.check-wrap.green input[type="checkbox"]+label:before,
+.radio-wrap.green input[type="radio"]+label:before {
+    background-color: #3dbb11;
 }
 
-.check-wrap.yellow input[type="checkbox"]+label:before,
-.radio-wrap.yellow input[type="radio"]+label:before {
-    background-color: #f39c11;
+.check-wrap.pinck input[type="checkbox"]+label:before,
+.radio-wrap.pinck input[type="radio"]+label:before {
+    background-color: #ff599e;
 }
 
 .check-wrap.blue input[type="checkbox"]+label:before,
@@ -995,6 +1007,7 @@ form.search-form input[type="search"]{
     background-color: transparent;
     border: 0;
 }
+
 
 
 /*----- size filter -----*/
@@ -3904,7 +3917,7 @@ form.checkout .checkout-review h3 {
 
 .checkout_review td:last-child {
     text-align: right;
-    padding-left: 20px;
+   /* padding-left: 20px;*/
 } 
 
 /*------ checkout payment------*/

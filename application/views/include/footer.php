@@ -1,6 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
-?> 
+$data['Value'] = $this->session->userdata('Userlogindetails');
+?>  
 <footer>
            <div class="ft1">
   <img src="<?php echo base_url();?>front_assets/assets/images/12.png" style="position: absolute; transform: translate(0%, -4%); width: 100%">
@@ -13,7 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h5>Customer Service</h5>
 
                             <ul class="footer-nav">
-                                 <li><a href="<?php echo base_url('login.html');?>">My Account</a></li>
+                                 <?php if(!empty($data['Value'])){?>
+                                 <li><a href="<?php echo base_url('dashboard.html');?>">My Account</a></li>
+                                <?php }else{?>
+                                <li><a href="<?php echo base_url('login.html');?>">My Account</a></li>
+                               <?php }?>
                                 <li><a href="<?php echo base_url('login.html');?>">Order History</a></li>
                                <li><a href="<?php echo base_url('deliveryinformation.html');?>">Delivery Information</a></li>
                                 <li><a href="<?php echo base_url('returnpolicy.html')?>">Return Policy</a></li>
@@ -165,11 +170,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 success: function(data){
 
                     $('#detail_cart').html(data);
-                   
+
                 }
             });
         });
-		
+
 
     /*     $('#detail_cart').load("<?php echo site_url('Cart/load_cart');?>"); */
 

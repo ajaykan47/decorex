@@ -36,10 +36,7 @@ error_reporting(0);
                                         <tr>
                                             <th>Sn.</th>
                                             <th>Name</th>
-                                            <!--<th>Description</th>-->
-                                            <!--<th>Img</th>-->
                                             <th>Seo</th>
-                                            <!--<th>Meta Tag</th>-->
                                             <th>Meta Keyword</th>
                                             <th>Meta description</th>
                                             <th>Date</th>
@@ -55,10 +52,7 @@ error_reporting(0);
                                             <tr>
                                                 <td><?php echo $sn++; ?></td>
                                                 <td><?php echo $row->name; ?></td>
-                                               <!-- <td><?php echo $row->description; ?></td>-->
-                                                <!--<td><img style="width: 60px; height: 56px;  " src="<?php echo base_url();?>uploads/Category/<?php echo $row->filename; ?>"></td>-->
                                                 <td><?php echo $row->seo_title; ?></td>
-                                                <!--<td><?php //echo $row->meta_tag; ?></td>-->
                                                 <td><?php echo $row->meta_keyword_descr; ?></td>
                                                 <td><?php echo $row->meta_descr; ?></td>
                                                 <td><?php echo $row->created_at; ?></td>
@@ -77,6 +71,9 @@ error_reporting(0);
                                                     <a class="btn btn-danger"
                                                        href="<?php echo base_url(); ?>Admin/Category/deleteCategory?id=<?php echo base64_encode($row->cat_id) ; ?>"
                                                        onclick="return confirm('Would you want to delete?');">Delete</a>
+                                                    <a  href="<?php echo base_url();?>Admin/Categorygst/listCategorygst?idd=<?php  echo base64_encode($row->cat_id); ?>" class="btn btn-primary">
+                                                        Add Tax
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
