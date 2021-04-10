@@ -101,14 +101,14 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('TOGGLE_CLOSE_CLASS', 'hide-on-load');
 define('SITE_NAME', 'The Decorex JSB Lighting');
 
-define('ADMIN_EMAIL', 'reply@decorex.in');
-define('INFO_EMAIL', 'info@decorex.in');
-define('CONTACT_EMAIL', 'reply@decorex.in');
-define('SUBSCRIBE_EMAIL', 'reply@decorex.in');
+define('ADMIN_EMAIL', '');
+define('INFO_EMAIL', '');
+define('CONTACT_EMAIL', 'ajaykan47@gmail.com');
+define('SUBSCRIBE_EMAIL', '');
 
 define('SMTP_NAME', 'Decorex JSB Lighting');
-define('SMTP_EMAIL', 'reply@decorex.in');
-define('SMTP_HOST', 'mail.decorex.in');
+define('SMTP_EMAIL', '');
+define('SMTP_HOST', '');
 define('SMTP_PORT', 587);
-define('SMTP_USER', 'reply@decorex.in');
-define('SMTP_PASS', 'reply@123');
+define('SMTP_USER', '');
+define('SMTP_PASS', '');
